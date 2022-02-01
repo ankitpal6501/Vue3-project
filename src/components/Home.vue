@@ -1,5 +1,6 @@
 <template>
 <div v-if="user">
+  <h1>Welcome to the mint carrier</h1>
    <router-link to="/">Home</router-link>
    <router-link to="/about">About</router-link>
    <button @click="empty">Logout</button>
