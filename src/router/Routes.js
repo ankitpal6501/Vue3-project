@@ -17,12 +17,15 @@ const routes=[
     {
         path:'/login',
         name:'Login',
-        component:Login
+        component:Login,
+       
+        
     },
     {
         path:'/sign',
         name:'Sign',
-        component:Sign
+        component:Sign,
+       
     },
     {
         path:'/about',
@@ -39,7 +42,9 @@ const router=createRouter({
     routes,
 })
  router.beforeEach((to,from,next)=>{
-     if(to.path=='/login' && auth.currentUser){
+      console.log(auth.currentUser)
+     if((to.path==='/login' || to.path==='/sign') && auth.currentUser && from.path==='/'){
+         
          next('/')
          return
      }

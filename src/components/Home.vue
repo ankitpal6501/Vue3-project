@@ -7,24 +7,25 @@
   </div>
 </template>
 <script>
-import { onBeforeMount, toRef } from '@vue/runtime-core'
-import { usedata } from "../store/index"
-export default{
-    name:'Home',
-    setup(){
-      const{user}=toRef (usedata())
-      const{fetch}=usedata()
-      const{logout}=usedata()
-       onBeforeMount(()=>{
-        fetch()
-      }) 
-      const empty=()=>{
-          logout()
-      }
-      return{empty,user}
-    }
- 
-}
+import { onBeforeMount} from '@vue/runtime-core'
+import { storeToRefs } from 'pinia'
+import { usedata } from '../store/index'
+
+export default {
+  name: 'Home',
+  setup() {
+    const { user } = storeToRefs(usedata());
+      // const{fetch}=usedata()
+    const { logout } = usedata();
+    onBeforeMount(() => {
+      // fetch() 
+    })
+    const empty = () => {
+      logout();
+    };
+    return { empty, user };
+  } 
+};
 </script>
 <style scoped>
 button{

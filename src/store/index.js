@@ -14,7 +14,7 @@ export const usedata= defineStore('unique',{
    
     actions:{
         clearUser () {
-            this.$reset()
+            this.user=null
           },
         setUser(details){
             this.user=details
@@ -22,7 +22,7 @@ export const usedata= defineStore('unique',{
         async login(data){
             const {email,password}=data
             try{
-                console.log(email,password)
+                
                 await signInWithEmailAndPassword(auth,email,password)
             }
             catch (error){
@@ -69,25 +69,27 @@ export const usedata= defineStore('unique',{
                 return
             }
             this.setUser(auth.currentUser);
-             router.push('/login')
+             router.push('/')
         },
         async logout(){
             await signOut(auth)
             this.clearUser()   
             router.push('/login')         
         },
-        fetch(){
-            auth.onAuthStateChanged(async(user)=>{
-                if(user===null){
-                    this.clearUser()
-                }else{
-                    this.setUser(user)
-                    if(router.isReady() && router.currentRoute.value.path==='/login'){
-                        router.push('/')
-                    }
-                }
+        // fetch(){
+            
+        //     auth.onAuthStateChanged(async (user)=>{ 
+        //         if(user===null){
+        //             this.clearUser()
+        //         }else{
+                
+        //             this.setUser(user)
+        //             if(router.isReady() && (router.currentRoute.value.path==='/login' || router.currentRoute.value.path==='/sign')){
+        //                 router.push('/')
+        //             }
+        //         }
   
-            })
-        }
+        //     })
+        // }
     }
 })
